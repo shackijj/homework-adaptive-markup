@@ -8,15 +8,31 @@
 <body>
   <template id="cards-list">
     <style>
+      * {
+        margin: 0;
+      }
+      .icon {
+        width: 17px;
+        height: 16px;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+      .icon_heart {
+        background-image: url('./design_specs/assets/Heart.png');
+      }
+      .icon_actions {
+        background-position: 0 6px;
+        background-image: url('./design_specs/assets/Actions.png');
+      }
       .cards-list {
         max-width: 704px;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: repeat(auto-fill, 275px);
+        grid-template-rows: repeat(auto-fill, 305px);
         grid-gap: 0px 16px;
         grid-auto-flow: dense;
       }
-      
+
       .card {
         display: grid;
       }
@@ -24,37 +40,54 @@
       .card_size_s {
         background-color: silver;
         grid-column: span 2;
-        height: 376px;
+        /* height: 376px; */
       }
 
       .card_size_m {
-        background-color: maroon;
         grid-column: span 3;
-        height: 305px;
+        /* height: 305px; */
+
+        grid-template-rows: max-content 1fr 32px 32px;
+        grid-template-columns: 1fr 43px;
+        grid-template-areas: 
+          "t t"
+          "i i"
+          "d a"
+          "d h";
       }
 
       .card_size_l {
         background-color: lightblue;
         grid-column: span 6;
-        height: 243px;
+        /* height: 243px; */
       }
 
       .card_title {
         font-size: 19px;
-        /* grid-area: t; */
+        margin-bottom: 8px;
+        grid-area: t;
       }
-      .cart_description {
+      .card_description {
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-size: 14px;
-       /*  grid-area: d; */
+        line-height: 20px;
+        grid-area: d;
       }
       .card_image {
-        /* grid-area: i; */
+        grid-area: i;
+        width: 100%;
+        height: auto;
       }
-      .card_controls {
-        /* grid-area: c; */
+      .card .icon {
+        justify-self: center;
       }
-      .card_channel-name {
-        /* grid-area: cn; */
+      .card .icon_heart {
+        grid-area: h;
+        align-self: end;
+      }
+      .card_more .icon_actions {
+        grid-area: a;
       }
     </style>
     <div class="cards-list">
@@ -77,12 +110,10 @@
           `<div class="card card_size_${size}">
             <h1 class="card_title" style="color: ${titleColor};">${title}</h1>` +
             (description ? `<p class="card_description">${description}</p>` : '') +
-            (image ? `<img class="card_image" src="${image}">` : '' )+
+            (image ? `<img class="card_image" src="${image}">` : '' ) +
             (channelName ? `<span class="card_channel-name">${channelName}</span>` : '') +
-            `<div class="card_controls">
-                <span class="icon icon_like"/>
-                <span class="icon icon_more"/>
-            </div>
+            `<span class="icon icon_heart"></span>
+            <span class="icon icon_actions"></span>
           </div>`
         , '');
         this.shadowRoot.querySelector('.cards-list').innerHTML = markup;
