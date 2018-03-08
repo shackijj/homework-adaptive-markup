@@ -47,13 +47,39 @@
         grid-column: span 3;
         /* height: 305px; */
 
-        grid-template-rows: max-content 1fr 32px 32px;
-        grid-template-columns: 1fr 43px;
-        grid-template-areas: 
-          "t t"
-          "i i"
-          "d a"
-          "d h";
+        grid-template-rows: [header-start] 1fr [header-end footer-start] 32px [footer-middle] 32px [footer-end];
+        grid-template-columns: [col-start] 1fr [col-mid] 43px [col-end];
+      }
+
+      .card_size_m .card_title {
+        grid-column: col;
+        grid-row-start: header;
+      }
+
+      .card_size_m .card_image {
+        grid-column: col;
+        grid-row: header;
+        align-self: end;
+      }
+
+      .card_size_m .card_description {
+        grid-row: footer;
+        grid-column: col-start / col-mid;
+      }
+
+      .card_size_m .card_description {
+        grid-row: footer;
+        grid-column: col-start / col-mid;
+      }
+
+      .card_size_m .icon_actions {
+        grid-row: footer-start / footer-middle;
+        grid-column: col-mid / col-end;
+      }
+
+      .card_size_m .icon_heart{
+        grid-row: footer-middle / footer-end;
+        grid-column: col-mid / col-end;
       }
 
       .card_size_l {
@@ -64,30 +90,20 @@
 
       .card_title {
         font-size: 19px;
-        margin-bottom: 8px;
-        grid-area: t;
       }
       .card_description {
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: 14px;
         line-height: 20px;
-        grid-area: d;
       }
       .card_image {
-        grid-area: i;
         width: 100%;
         height: auto;
       }
-      .card .icon {
-        justify-self: center;
-      }
-      .card .icon_heart {
-        grid-area: h;
-        align-self: end;
-      }
+
       .card_more .icon_actions {
-        grid-area: a;
+
       }
     </style>
     <div class="cards-list">
