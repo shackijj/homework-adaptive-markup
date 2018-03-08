@@ -1,13 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width">
+  <meta charset="utf-8"/>
   <title>ZEN</title>
 </head>
 <body>
   <template id="cards-list">
     <style>
-      .card-list { background-color: gray; }
+      .cards-list {
+        max-width: 704px;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(auto-fill, 275px);
+        grid-gap: 0px 16px;
+        grid-auto-flow: dense;
+      }
+      
+      .card {
+        display: grid;
+      }
+
+      .card_size_s {
+        background-color: silver;
+        grid-column: span 2;
+        height: 376px;
+      }
+
+      .card_size_m {
+        background-color: maroon;
+        grid-column: span 3;
+        height: 305px;
+      }
+
+      .card_size_l {
+        background-color: lightblue;
+        grid-column: span 6;
+        height: 243px;
+      }
+
+      .card_title {
+        font-size: 19px;
+        /* grid-area: t; */
+      }
+      .cart_description {
+        font-size: 14px;
+       /*  grid-area: d; */
+      }
+      .card_image {
+        /* grid-area: i; */
+      }
+      .card_controls {
+        /* grid-area: c; */
+      }
+      .card_channel-name {
+        /* grid-area: cn; */
+      }
     </style>
     <div class="cards-list">
     </div>
@@ -21,17 +69,22 @@
 
         const shadowRoot = this.attachShadow({mode: 'open'})
           .appendChild(templateContent.cloneNode(true));
-
       }
       connectedCallback() {
         const cards = JSON.parse(this.getAttribute('cards'));
-        const markup = cards.reduce((acc, {description, image, size, title, titleColor}) =>acc + `
-          <div class="card card_size_${size}">
-            <h1 style="color: ${titleColor};">${title}</h1>
-            <p class="card_description">${description}</p>
-            <img src="${image}">
-          </div>
-        `, '');
+        const markup = cards.reduce((acc, {description, image, size, title, titleColor, channelName}) =>
+          acc +
+          `<div class="card card_size_${size}">
+            <h1 class="card_title" style="color: ${titleColor};">${title}</h1>` +
+            (description ? `<p class="card_description">${description}</p>` : '') +
+            (image ? `<img class="card_image" src="${image}">` : '' )+
+            (channelName ? `<span class="card_channel-name">${channelName}</span>` : '') +
+            `<div class="card_controls">
+                <span class="icon icon_like"/>
+                <span class="icon icon_more"/>
+            </div>
+          </div>`
+        , '');
         this.shadowRoot.querySelector('.cards-list').innerHTML = markup;
       }
     }
