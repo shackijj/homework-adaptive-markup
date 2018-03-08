@@ -2,10 +2,46 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Яндекс Дзен</title>
+  <title>ZEN</title>
 </head>
 <body>
+  <template id="cards-list">
+    <style>
+      .card-list { background-color: gray; }
+    </style>
+    <div class="cards-list">
+    </div>
+  </template>
+  <script>
+    class CardsList extends HTMLElement {
+      constructor() {
+        super();
+        let template = document.getElementById('cards-list');
+        let templateContent = template.content;
+
+        const shadowRoot = this.attachShadow({mode: 'open'})
+          .appendChild(templateContent.cloneNode(true));
+
+      }
+      connectedCallback() {
+        const cards = JSON.parse(this.getAttribute('cards'));
+        const markup = cards.reduce((acc, {description, image, size, title, titleColor}) =>acc + `
+          <div class="card card_size_${size}">
+            <h1 style="color: ${titleColor};">${title}</h1>
+            <p class="card_description">${description}</p>
+            <img src="${image}">
+          </div>
+        `, '');
+        this.shadowRoot.querySelector('.cards-list').innerHTML = markup;
+      }
+    }
+    customElements.define('cards-list', CardsList);
+  </script>
   <script src="data.js"></script>
-  <script></script>
+  <script>
+    const el = document.createElement('cards-list');
+    el.setAttribute('cards', JSON.stringify(data));
+    document.body.appendChild(el);
+  </script>
 </body>
 </html>
