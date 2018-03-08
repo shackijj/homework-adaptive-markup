@@ -6,7 +6,7 @@
   <title>ZEN</title>
 </head>
 <body>
-  <template id="cards-list">
+  <template id="cards-list-template">
     <style>
       * {
         margin: 0;
@@ -28,7 +28,7 @@
         max-width: 704px;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: repeat(auto-fill, 305px);
+        grid-template-rows: 305px 305px;
         grid-gap: 0px 16px;
         grid-auto-flow: dense;
       }
@@ -37,49 +37,84 @@
         display: grid;
       }
 
-      .card_size_s {
-        background-color: silver;
-        grid-column: span 2;
-        /* height: 376px; */
-      }
-
       .card_size_m {
         grid-column: span 3;
-        /* height: 305px; */
-
         grid-template-rows: [header-start] 1fr [header-end footer-start] 32px [footer-middle] 32px [footer-end];
-        grid-template-columns: [col-start] 1fr [col-mid] 43px [col-end];
+        grid-template-columns: [description-start main-start] 1fr [description-end controls-start] 43px [controls-end main-end];
       }
 
       .card_size_m .card_title {
-        grid-column: col;
-        grid-row-start: header;
+        line-height: 23px;
+        font-size: 19px;
+        grid-row: header;
+        grid-column: main;
+        align-self: start;
+        background-color: #fff;
+        z-index: 1;
+        padding-bottom: 7px;
       }
 
       .card_size_m .card_image {
-        grid-column: col;
         grid-row: header;
+        grid-column: main;
+        margin-bottom: 8px;
         align-self: end;
       }
 
       .card_size_m .card_description {
         grid-row: footer;
-        grid-column: col-start / col-mid;
-      }
-
-      .card_size_m .card_description {
-        grid-row: footer;
-        grid-column: col-start / col-mid;
+        grid-column: description;
       }
 
       .card_size_m .icon_actions {
         grid-row: footer-start / footer-middle;
-        grid-column: col-mid / col-end;
+        grid-column: controls;
+        justify-self: center;
       }
 
-      .card_size_m .icon_heart{
+      .card_size_m .icon_heart {
         grid-row: footer-middle / footer-end;
-        grid-column: col-mid / col-end;
+        grid-column: controls;
+        justify-self: center;
+        align-self: end;
+      }
+
+      .card_size_s {
+        grid-column: span 2;
+        grid-template-rows: [main-start title-start] min-content [title-end controls-start] 1fr [controls-end main-end];
+        grid-template-columns: [main-start] 1fr [controls-start] 43px [controls-end main-end];
+      }
+
+      .card_size_s .card_title {
+        grid-row: title;
+        grid-column: main;
+        z-index: 1;
+        background-color: #fff;
+        font-size: 17px;
+        line-height: 20px;
+        padding-bottom: 7px;
+        align-self: start;
+      }
+
+      .card_size_s .card_image {
+        grid-row: main;
+        grid-column: main;
+      }
+
+      .card_size_s .icon {
+        justify-self: center;
+      }
+      .card_size_s .icon_heart {
+        grid-row: controls;
+        grid-column: controls;
+        align-self: end;
+        margin-bottom: 16px;
+      }
+
+      .card_size_s .icon_actions {
+        grid-row: controls;
+        grid-column: controls;
+        align-self: start;
       }
 
       .card_size_l {
@@ -103,24 +138,19 @@
       }
 
       .card_more .icon_actions {
-
+        grid-template-rows: [header-start] 1fr [header-end footer-start] 32px [footer-middle] 32px [footer-end];
+        grid-template-columns: [col-start] 1fr [col-mid] 43px [col-end];
       }
     </style>
     <div class="cards-list">
     </div>
   </template>
   <script>
-    class CardsList extends HTMLElement {
-      constructor() {
-        super();
-        let template = document.getElementById('cards-list');
-        let templateContent = template.content;
+      function CardsList(el, cards) {
+        let template = document.getElementById('cards-list-template');
+        let templateContent = template.content.cloneNode(true);
+        let listEl = templateContent.querySelector('.cards-list');
 
-        const shadowRoot = this.attachShadow({mode: 'open'})
-          .appendChild(templateContent.cloneNode(true));
-      }
-      connectedCallback() {
-        const cards = JSON.parse(this.getAttribute('cards'));
         const markup = cards.reduce((acc, {description, image, size, title, titleColor, channelName}) =>
           acc +
           `<div class="card card_size_${size}">
@@ -132,16 +162,14 @@
             <span class="icon icon_actions"></span>
           </div>`
         , '');
-        this.shadowRoot.querySelector('.cards-list').innerHTML = markup;
+        listEl.innerHTML = markup;
+        el.appendChild(templateContent);
       }
-    }
-    customElements.define('cards-list', CardsList);
   </script>
   <script src="data.js"></script>
+  <div class="container">
   <script>
-    const el = document.createElement('cards-list');
-    el.setAttribute('cards', JSON.stringify(data));
-    document.body.appendChild(el);
+    CardsList(document.querySelector('.container'), data);
   </script>
 </body>
 </html>
