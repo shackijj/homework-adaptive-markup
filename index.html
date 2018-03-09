@@ -85,8 +85,8 @@
         grid-column: span 2;
         height: 224px;
         margin-bottom: 38px;
-        grid-template-rows: [main-start title-start] min-content [title-end controls-start] 1fr [controls-end main-end];
-        grid-template-columns: [main-start] 1fr [controls-start] 43px [controls-end main-end];
+        grid-template-rows: [main-start title-start] min-content [title-end controls-start] 1fr [no-image-start] 43px [no-image-end controls-end main-end];
+        grid-template-columns: [main-start no-image-half-start] max-content [no-image-half-end] 1fr [controls-start] 43px [controls-end main-end];
       }
 
       .card_size_s .card_title {
@@ -122,6 +122,40 @@
         grid-column: controls;
         align-self: start;
         margin-top: 14px;
+      }
+
+      .card_size_s.card_no-image .card_title {
+        grid-row: title;
+        grid-column: main;
+      }
+
+      .card_size_s.card_no-image .card_description {
+        grid-column: main;
+        grid-row: controls-start / no-image-start;
+      }
+
+      .card_size_s.card_no-image .icon {
+        align-self: center;
+      }
+      .card_size_s.card_no-image .icon_actions {
+        grid-row: no-image;
+        grid-column: no-image-half-end / main-end;
+        justify-self: left;
+        margin: 0 15px;
+      }
+
+      .card_size_s.card_no-image .icon_heart {
+        grid-row: no-image;
+        grid-column: main;
+        justify-self: right;
+        margin: 0 15px;
+      }
+
+      .card_size_s.card_no-image .card_channel-name {
+        font-weight: bold;
+        grid-column: no-image-half;
+        grid-row: no-image;
+        align-self: center;
       }
 
       .card_size_l {
@@ -191,7 +225,7 @@
 
         const markup = cards.reduce((acc, {description, image, size, title, titleColor, channelName}) =>
           acc +
-          `<div class="card card_size_${size}">
+          `<div class="card card_size_${size} ${!image ? 'card_no-image' : ''}">
             <h1 class="card_title" style="color: ${titleColor};">${title}</h1>` +
             (description ? `<p class="card_description">${description}</p>` : '') +
             (image ? `<img class="card_image" src="${image}">` : '' ) +
