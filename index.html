@@ -120,17 +120,15 @@
       }
 
       .card_size_l {
-        background-color: lightblue;
         grid-column: span 6;
         grid-gap: 0px 16px;
         grid-template-rows: [main-start title-start] 56px [title-end description-start] 160px [description-end controls-start] 27px [controls-end main-end];
-        grid-template-columns: [main-start image-start] 464px [image-end content-start controls-start] 224px [controls-end content-end main-end]
+        grid-template-columns: [main-start image-start] 1fr [image-end content-start controls-start] 224px [controls-end content-end main-end]
       }
 
       .card_size_l .card_image {
         grid-row: main;
         grid-column: image; 
-        border: 1px solid red;
       }
 
       .card_size_l .card_title {
@@ -139,13 +137,11 @@
         line-height: 23px;
         max-height: 48px;
         overflow: hidden;
-        border: 1px solid blue;
       }
 
       .card_size_l .card_description {
         grid-row: description;
         grid-column: content;
-        border: 1px solid deeppink;
       }
 
       .card_size_l .icon_heart {
@@ -154,14 +150,12 @@
         justify-self: right;
         align-self: center;
         padding-right: 13px;
-        border: 1px solid hotpink;
       }
 
       .card_size_l .icon_actions {
         grid-row: controls;
         grid-column: content;
         align-self: center;
-        border: 1px solid aquamarine;
       }
 
 
