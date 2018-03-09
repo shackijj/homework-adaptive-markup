@@ -81,7 +81,7 @@
 
       .card_size_s {
         grid-column: span 2;
-        grid-template-rows: [main-start title-start] min-content [title-end controls-start] 1fr [controls-end main-end];
+        grid-template-rows: 29px [main-start title-start] 1fr [title-end controls-start] minmax(100px, 180px) [controls-end main-end] 38px;
         grid-template-columns: [main-start] 1fr [controls-start] 43px [controls-end main-end];
       }
 
@@ -99,6 +99,7 @@
       .card_size_s .card_image {
         grid-row: main;
         grid-column: main;
+        align-self: end;
       }
 
       .card_size_s .icon {
@@ -115,6 +116,7 @@
         grid-row: controls;
         grid-column: controls;
         align-self: start;
+        margin-top: 14px;
       }
 
       .card_size_l {
