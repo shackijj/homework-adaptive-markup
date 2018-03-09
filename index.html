@@ -22,7 +22,6 @@
         background-image: url('./design_specs/assets/Actions.png');
       }
       .cards-list {
-        max-width: 704px;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         grid-auto-rows: auto;
@@ -32,6 +31,20 @@
 
       .card {
         display: grid;
+      }
+
+      .card__title {
+        font-size: 19px;
+      }
+      .card__description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .card__image {
+        width: 100%;
+        height: auto;
       }
 
       .card_size_m {
@@ -76,6 +89,13 @@
         grid-column: controls;
         justify-self: center;
         align-self: end;
+      }
+
+      @media (max-width: 550px) {
+        .card_size_m  {
+          height: auto;
+          grid-column: span 6;
+        }
       }
 
       .card_size_s {
@@ -157,6 +177,34 @@
         align-self: center;
       }
 
+      @media (max-width: 700px) {
+        .card_size_s .icon_actions {
+          align-self: center;
+        }
+      }
+
+      @media (max-width: 550px) {
+        .card_size_s {
+          grid-column: span 3;
+        }
+
+        .card_size_s .icon_actions {
+          align-self: start;
+        }
+      }
+
+      @media (max-width: 450px) {
+        .card_size_s {
+          grid-column: span 6;
+          height: auto;
+        }
+        .card_size_s .card__image {
+          grid-row: controls;
+          grid-column: main;
+          align-self: end;
+        }
+      }
+
       .card_size_l {
         margin-bottom: 32px;
         grid-column: span 6;
@@ -197,20 +245,28 @@
         align-self: center;
       }
 
+      @media (max-width: 720px) {
+        .card_size_l {
+          grid-template-rows: auto;
+          grid-template-columns: auto;
+        }
 
-      .card__title {
-        font-size: 19px;
+        .card_size_l .card__image,
+        .card_size_l .card__title,
+        .card_size_l .card__image,
+        .card_size_l .card__description {
+          grid-row: auto;
+          grid-column: 1 / -1;
+        }
+        .card_size_l .icon_heart,
+        .card_size_l .icon_actions {
+          margin-top: 7px;
+          grid-column: 1 / -1;
+          grid-row: 4;
+        }
       }
-      .card__description {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 14px;
-        line-height: 20px;
-      }
-      .card__image {
-        width: 100%;
-        height: auto;
-      }
+
+
 
     </style>
     <div class="cards-list">
@@ -246,17 +302,13 @@
       margin: 0;
     }
     .page-wrapper {
-      display: grid;
-      grid-template-columns: 1fr [main-start] 740px [main-end] 1fr;
-      grid-template-rows: [header-start] 115px [header-end content-start] 1fr [content-end];
+      width: 96%;
+      max-width: 704px;
+      margin: 0 auto;
     }
     .header {
-      grid-row: header;
-      grid-column: main;
     }
     .content {
-      grid-row: content; 
-      grid-column: main;
     }
     .header .logo {
       margin: 43px 0;
