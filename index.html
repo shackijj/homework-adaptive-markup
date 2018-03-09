@@ -8,9 +8,6 @@
 <body>
   <template id="cards-list-template">
     <style>
-      * {
-        margin: 0;
-      }
       .icon {
         width: 17px;
         height: 16px;
@@ -245,8 +242,21 @@
   </script>
   <script src="data.js"></script>
   <style>
+    * {
+      margin: 0;
+    }
+    .page-wrapper {
+      display: grid;
+      grid-template-columns: 1fr [main-start] 740px [main-end] 1fr;
+      grid-template-rows: [header-start] 115px [header-end content-start] 1fr [content-end];
+    }
     .header {
-
+      grid-row: header;
+      grid-column: main;
+    }
+    .content {
+      grid-row: content; 
+      grid-column: main;
     }
     .header .logo {
       margin: 43px 0;
@@ -254,15 +264,17 @@
       height: 29px;
     }
   </style>
-  <div class="header">
-    <img class="logo"
-      src="./img/zen_logo.png"
-      srcset="./img/zen_logo@3x.png 2x"
-    >
+  <div class="page-wrapper">
+    <div class="header">
+      <img class="logo"
+        src="./img/zen_logo.png"
+        srcset="./img/zen_logo@3x.png 2x"
+      >
+    </div>
+    <div class="content"></div>
   </div>
-  <div class="сards-container">
   <script>
-    CardsList(document.querySelector('.сards-container'), data);
+    CardsList(document.querySelector('.content'), data);
   </script>
 </body>
 </html>
