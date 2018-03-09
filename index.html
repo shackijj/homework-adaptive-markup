@@ -45,7 +45,7 @@
         grid-template-columns: [description-start main-start] 1fr [description-end controls-start] 43px [controls-end main-end];
       }
 
-      .card_size_m .card_title {
+      .card_size_m .card__title {
         line-height: 23px;
         font-size: 19px;
         grid-row: header;
@@ -56,14 +56,14 @@
         padding-bottom: 7px;
       }
 
-      .card_size_m .card_image {
+      .card_size_m .card__image {
         grid-row: header;
         grid-column: main;
         margin-bottom: 8px;
         align-self: end;
       }
 
-      .card_size_m .card_description {
+      .card_size_m .card__description {
         grid-row: footer;
         grid-column: description;
       }
@@ -89,7 +89,7 @@
         grid-template-columns: [main-start no-image-half-start] max-content [no-image-half-end] 1fr [controls-start] 43px [controls-end main-end];
       }
 
-      .card_size_s .card_title {
+      .card_size_s .card__title {
         grid-row: title;
         max-height: 80px;
         overflow: hidden;
@@ -101,7 +101,7 @@
         align-self: start;
       }
 
-      .card_size_s .card_image {
+      .card_size_s .card__image {
         grid-row: main;
         grid-column: main;
         align-self: end;
@@ -124,12 +124,12 @@
         margin-top: 14px;
       }
 
-      .card_size_s.card_no-image .card_title {
+      .card_size_s.card_no-image .card__title {
         grid-row: title;
         grid-column: main;
       }
 
-      .card_size_s.card_no-image .card_description {
+      .card_size_s.card_no-image .card__description {
         grid-column: main;
         grid-row: controls-start / no-image-start;
       }
@@ -151,7 +151,7 @@
         margin: 0 15px;
       }
 
-      .card_size_s.card_no-image .card_channel-name {
+      .card_size_s.card_no-image .card__channel-name {
         font-weight: bold;
         grid-column: no-image-half;
         grid-row: no-image;
@@ -166,12 +166,12 @@
         grid-template-columns: [main-start image-start] 1fr [image-end content-start controls-start] 224px [controls-end content-end main-end]
       }
 
-      .card_size_l .card_image {
+      .card_size_l .card__image {
         grid-row: main;
         grid-column: image; 
       }
 
-      .card_size_l .card_title {
+      .card_size_l .card__title {
         grid-row: title;
         grid-column: content;
         line-height: 23px;
@@ -179,7 +179,7 @@
         overflow: hidden;
       }
 
-      .card_size_l .card_description {
+      .card_size_l .card__description {
         grid-row: description;
         grid-column: content;
       }
@@ -199,16 +199,16 @@
       }
 
 
-      .card_title {
+      .card__title {
         font-size: 19px;
       }
-      .card_description {
+      .card__description {
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: 14px;
         line-height: 20px;
       }
-      .card_image {
+      .card__image {
         width: 100%;
         height: auto;
       }
@@ -226,10 +226,10 @@
         const markup = cards.reduce((acc, {description, image, size, title, titleColor, channelName}) =>
           acc +
           `<div class="card card_size_${size} ${!image ? 'card_no-image' : ''}">
-            <h1 class="card_title" style="color: ${titleColor};">${title}</h1>` +
-            (description ? `<p class="card_description">${description}</p>` : '') +
-            (image ? `<img class="card_image" src="${image}">` : '' ) +
-            (channelName ? `<span class="card_channel-name">${channelName}</span>` : '') +
+            <h1 class="card__title" style="color: ${titleColor};">${title}</h1>` +
+            (description ? `<p class="card__description">${description}</p>` : '') +
+            (image ? `<img class="card__image" src="${image}">` : '' ) +
+            (channelName ? `<span class="card__channel-name">${channelName}</span>` : '') +
             `<span class="icon icon_heart"></span>
             <span class="icon icon_actions"></span>
           </div>`
@@ -239,9 +239,12 @@
       }
   </script>
   <script src="data.js"></script>
-  <div class="container">
+  <div class="header">
+    <img class="logo" src="img/zen_logo">
+  </div>
+  <div class="сards-container">
   <script>
-    CardsList(document.querySelector('.container'), data);
+    CardsList(document.querySelector('.сards-container'), data);
   </script>
 </body>
 </html>
