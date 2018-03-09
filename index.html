@@ -28,7 +28,7 @@
         max-width: 704px;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: 305px 305px;
+        grid-auto-rows: auto;
         grid-gap: 0px 16px;
         grid-auto-flow: dense;
       }
@@ -38,6 +38,8 @@
       }
 
       .card_size_m {
+        height: 305px;
+        margin-bottom: 29px;
         grid-column: span 3;
         grid-template-rows: [header-start] 1fr [header-end footer-start] 32px [footer-middle] 32px [footer-end];
         grid-template-columns: [description-start main-start] 1fr [description-end controls-start] 43px [controls-end main-end];
@@ -81,18 +83,21 @@
 
       .card_size_s {
         grid-column: span 2;
-        grid-template-rows: 29px [main-start title-start] 1fr [title-end controls-start] minmax(100px, 180px) [controls-end main-end] 38px;
+        height: 224px;
+        margin-bottom: 38px;
+        grid-template-rows: [main-start title-start] min-content [title-end controls-start] 1fr [controls-end main-end];
         grid-template-columns: [main-start] 1fr [controls-start] 43px [controls-end main-end];
       }
 
       .card_size_s .card_title {
         grid-row: title;
+        max-height: 80px;
+        overflow: hidden;
         grid-column: main;
         z-index: 1;
         background-color: #fff;
         font-size: 17px;
         line-height: 20px;
-        padding-bottom: 7px;
         align-self: start;
       }
 
@@ -120,6 +125,7 @@
       }
 
       .card_size_l {
+        margin-bottom: 32px;
         grid-column: span 6;
         grid-gap: 0px 16px;
         grid-template-rows: [main-start title-start] 56px [title-end description-start] 160px [description-end controls-start] 27px [controls-end main-end];
@@ -173,10 +179,6 @@
         height: auto;
       }
 
-      .card_more .icon_actions {
-        grid-template-rows: [header-start] 1fr [header-end footer-start] 32px [footer-middle] 32px [footer-end];
-        grid-template-columns: [col-start] 1fr [col-mid] 43px [col-end];
-      }
     </style>
     <div class="cards-list">
     </div>
