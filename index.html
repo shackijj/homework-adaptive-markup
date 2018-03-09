@@ -94,6 +94,7 @@
         max-height: 80px;
         overflow: hidden;
         grid-column: main;
+        box-shadow: 0 7px 0 #fff; /** Padding emulation */
         z-index: 1;
         background-color: #fff;
         font-size: 17px;
@@ -127,6 +128,7 @@
       .card_size_s.card_no-image .card__title {
         grid-row: title;
         grid-column: main;
+        box-shadow: none;
       }
 
       .card_size_s.card_no-image .card__description {
@@ -228,7 +230,10 @@
           `<div class="card card_size_${size} ${!image ? 'card_no-image' : ''}">
             <h1 class="card__title" style="color: ${titleColor};">${title}</h1>` +
             (description ? `<p class="card__description">${description}</p>` : '') +
-            (image ? `<img class="card__image" src="${image}">` : '' ) +
+            (image ? `<img class="card__image"
+                        src="${image}.png" 
+                        srcset="${image}@3x.png 2x"
+                      >` : '' ) +
             (channelName ? `<span class="card__channel-name">${channelName}</span>` : '') +
             `<span class="icon icon_heart"></span>
             <span class="icon icon_actions"></span>
@@ -239,8 +244,21 @@
       }
   </script>
   <script src="data.js"></script>
+  <style>
+    .header {
+
+    }
+    .header .logo {
+      margin: 43px 0;
+      width: 91px;
+      height: 29px;
+    }
+  </style>
   <div class="header">
-    <img class="logo" src="img/zen_logo">
+    <img class="logo"
+      src="./img/zen_logo.png"
+      srcset="./img/zen_logo@3x.png 2x"
+    >
   </div>
   <div class="сards-container">
   <script>
