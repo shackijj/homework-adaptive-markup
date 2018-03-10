@@ -99,6 +99,12 @@
         }
       }
 
+      @media (min-width: 1024px) {
+        .card_size_m  {
+          height: auto;
+        }
+      }
+
       .card_size_s {
         grid-column: span 2;
         height: 224px;
@@ -206,6 +212,12 @@
         }
       }
 
+      @media (min-width: 1024px) {
+        .card_size_s {
+          height: auto;
+        }
+      }
+
       .card_size_l {
         margin-bottom: 32px;
         grid-column: span 6;
@@ -267,6 +279,12 @@
         }
       }
 
+      @media (min-width: 1024px) {
+        .card_size_l {
+          grid-template-rows: [main-start title-start] 56px [title-end description-start] 160px [description-end controls-start] 27px [controls-end main-end];
+          grid-template-columns: [main-start image-start] 1fr [image-end content-start controls-start] 1fr [controls-end content-end main-end]
+        }
+      }
 
 
     </style>
@@ -297,7 +315,6 @@
         el.appendChild(templateContent);
       }
   </script>
-  <script src="data.js"></script>
   <style>
     body {
       font-family: "YS Text";
@@ -310,21 +327,50 @@
       max-width: 704px;
       margin: 0 auto;
     }
+    .header {
+      top: 0;
+      position: fixed;
+      background-color: #fff;
+      z-index: 10;
+      width: 100%;
+    }
+    .content {
+      margin-top: 115px;
+    }
     .header .logo {
       margin: 43px 0;
       width: 91px;
       height: 29px;
     }
+
+    @media (max-width: 720px) {
+      .header .logo {
+        margin: 21px 0;
+        width: 91px;
+        height: 29px;
+      }
+      .content {
+        margin-top: 71px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .page-wrapper {
+        width: 96%;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+    }
   </style>
   <div class="page-wrapper">
     <div class="header">
       <img class="logo"
-        src="./img/zen_logo.png"
-        srcset="./img/zen_logo@3x.png 2x"
+        src="img/zen_logo.png"
+        srcset="img/zen_logo@3x.png 2x"
       >
     </div>
     <div class="content"></div>
   </div>
+  <script src="data.js"></script>
   <script>
     CardsList(document.querySelector('.content'), data);
   </script>
