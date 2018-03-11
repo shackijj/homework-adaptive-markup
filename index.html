@@ -6,6 +6,7 @@
   <meta name="robots" content="noindex">
   <title>ZEN</title>
   <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="styles/reset.css">
 </head>
 <body>
   <template id="cards-list-template">
@@ -36,13 +37,13 @@
       }
 
       .card__title {
-        font-size: 19px;
+        font-size: 1.357rem;
+        font-weight: bold;
       }
       .card__description {
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: 14px;
-        line-height: 20px;
+        line-height: 1.429rem;
       }
       .card__image {
         width: 100%;
@@ -58,8 +59,8 @@
       }
 
       .card_size_m .card__title {
-        line-height: 23px;
-        font-size: 19px;
+        line-height: 1.643rem;
+        font-size: 1.357rem;
         grid-row: header;
         grid-column: main;
         align-self: start;
@@ -125,8 +126,8 @@
         position: relative;
         z-index: 1;
         background-color: #fff;
-        font-size: 17px;
-        line-height: 20px;
+        font-size: 1.214rem;
+        line-height: 1.429rem;
         align-self: start;
       }
 
@@ -160,6 +161,7 @@
       }
 
       .card_size_s.card_no-image .card__description {
+        padding-top: 1.429rem;
         grid-column: main;
         grid-row: controls-start / no-image-start;
       }
@@ -320,12 +322,13 @@
       }
   </script>
   <style>
-    body {
-      font-family: "YS Text";
-      
-    }
     * {
       margin: 0;
+    }
+    html {
+      font-size: 14px;
+      -webkit-text-size-adjust: 100%;
+      font-family: "YS Text";
     }
     .page-wrapper {
       width: 96%;
@@ -360,7 +363,6 @@
     }
     @media (min-width: 1024px) {
       .page-wrapper {
-        width: 96%;
         max-width: 960px;
         margin: 0 auto;
       }
